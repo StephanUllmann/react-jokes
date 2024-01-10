@@ -7,7 +7,7 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [showArr, setShowArr] = useState([])
 
-  const getJoke = async () => {
+  const getJokes = async () => {
     try {
       setLoading(true)
       setErr(null)
@@ -24,9 +24,14 @@ function App() {
       
     }
   }
+  const handleNewJokes = (e) => {
+		e.target.blur();
+		window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+		getJokes();
+	};
 
   useEffect(() => {
-    getJoke()
+    getJokes()
     // fetch("https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,racist,sexist&amount=10").then(res => res.json()).then(data => console.log(data))
   }, [])
 
@@ -54,7 +59,7 @@ function App() {
           </button>}
         <hr/></div>)}
 
-        <button onClick={getJoke}>Get new Jokes</button>
+        <button onClick={(e) => handleNewJokes(e)}>Get new Jokes</button>
     </>
   )
 }
